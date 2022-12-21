@@ -1,7 +1,7 @@
 <div class="row p-5">
   <div class="col mat-typography">
     <h2>Add Student</h2>
-    <form (ngSubmit)="submit()" [formGroup]="form" >
+    <form (ngSubmit)="submit(form)" [formGroup]="form" >
       <mat-form-field appearance="outline">
         <mat-label>Firstname</mat-label>
         <input formControlName="firstName" matInput placeholder="First name">
@@ -16,6 +16,12 @@
         <mat-label>Title</mat-label>
         <input formControlName="title" matInput placeholder="Title">
         <mat-error *ngIf="form.controls['title'].errors?.['required']">Title is required</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Department</mat-label>
+        <mat-select formControlName="department">
+          <mat-option [value]="department.id" *ngFor="let department of departments">{{department.name}}</mat-option>
+        </mat-select>
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Phone number</mat-label>
@@ -33,7 +39,7 @@
         <input formControlName="address" matInput placeholder="Address">
         <mat-error *ngIf="form.controls['address'].errors?.['required']">Address is required</mat-error>
       </mat-form-field>
-      <button mat-raised-button color="primary" class="d-block ms-auto">Submit</button>
+      <button [disabled]="form.invalid" type="submit" mat-raised-button color="primary" class="d-block ms-auto">Submit</button>
     </form>
   </div>
 </div>

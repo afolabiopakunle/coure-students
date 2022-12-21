@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StudentService } from '../../../../services/student.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { DepartmentModel } from '../../../../models/department.model';
 
 @Component({
   selector: 'app-add-student-modal',
@@ -10,7 +11,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class AddStudentModal implements OnInit {
 
   form!: FormGroup;
-
+  departments: DepartmentModel[] = [];
   constructor(private studentService: StudentService, private fb: FormBuilder) {
   }
 
@@ -22,13 +23,24 @@ export class AddStudentModal implements OnInit {
       phoneNumber: ['', [Validators.required,]],
       email: ['', [Validators.required, Validators.email]],
       address: ['', [Validators.required]],
-      departmentId: ['', [Validators.required]],
       department: ['', [Validators.required]]
     })
+    this.studentService.getDepartments()
+      .subscribe(response => {
+        this.departments = response;
+        console.log(this.departments)
+      })
   }
 
-  submit() {
-    console.log(this.form)
+  submit(form: FormGroup) {
+    if(form.valid) {
+    this.studentService.createStudent(form.value)
+      .subscribe(response => {
+        console.log(response)
+      })
+    } else {
+      console.log(form)
+    }
   }
 
 }

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../environments/environment';
 import { StudentModel } from '../models/student.model';
 import { Observable } from 'rxjs';
+import { DepartmentModel } from '../models/department.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,4 +15,13 @@ export class StudentService {
   getStudents(): Observable<StudentModel[]> {
    return this.http.get<StudentModel[]>(`${environment.API_BASE_URL}/students`)
   }
+
+  createStudent(data: StudentModel): Observable<StudentModel> {
+    return this.http.post<StudentModel>(`${environment.API_BASE_URL}/students`, data)
+  }
+
+  getDepartments(): Observable<DepartmentModel[]> {
+    return this.http.get<DepartmentModel[]>(`${environment.API_BASE_URL}/departments`)
+  }
+
 }

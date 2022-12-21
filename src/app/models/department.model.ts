@@ -1,6 +1,8 @@
+import { SchoolModel } from './school.model';
+
 export interface DepartmentModel {
   id: number,
-  name: string,
+  name?: string,
   schoolId: number,
-  school: string
+  school: SchoolModel
 }

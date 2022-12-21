@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { StudentService } from '../../../../services/student.service';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { DepartmentModel } from '../../../../models/department.model';
+import { SchoolModel } from '../../../../models/school.model';
+import { StudentModel } from '../../../../models/student.model';
 
 @Component({
   selector: 'app-add-student-modal',
@@ -12,6 +14,8 @@ export class AddStudentModal implements OnInit {
 
   form!: FormGroup;
   departments: DepartmentModel[] = [];
+  schools: SchoolModel[] = [];
+
   constructor(private studentService: StudentService, private fb: FormBuilder) {
   }
 
@@ -21,26 +25,57 @@ export class AddStudentModal implements OnInit {
       lastName: ['', [Validators.required]],
       title: ['', [Validators.required]],
       phoneNumber: ['', [Validators.required,]],
+      dateOfBirth: ['', [Validators.required,]],
       email: ['', [Validators.required, Validators.email]],
       address: ['', [Validators.required]],
-      department: ['', [Validators.required]]
+      departmentId: ['', [Validators.required]],
+      schoolId: ['', [Validators.required]],
     })
     this.studentService.getDepartments()
       .subscribe(response => {
         this.departments = response;
         console.log(this.departments)
       })
+    this.studentService.getSchools()
+      .subscribe(response => {
+        this.schools = response;
+        console.log(this.schools)
+      })
   }
 
   submit(form: FormGroup) {
-    if(form.valid) {
-    this.studentService.createStudent(form.value)
-      .subscribe(response => {
-        console.log(response)
-      })
-    } else {
-      console.log(form)
+    if (form.valid) {
+    const pickedDept = this.departments.find(department => department.id === this.form.value['departmentId']);
+    const pickedSchool = this.schools.find(school => school.id === this.form.value['schoolId']);
+    const body: StudentModel = {
+        // id: Math.random() * 9999999,
+        firstName: this.form.value['firstName'],
+        lastName: this.form.value['lastName'],
+        title: this.form.value['title'],
+        email: this.form.value['email'],
+        address: this.form.value['address'],
+        phoneNumber: this.form.value['phoneNumber'],
+        dateOfBirth: this.form.value['dateOfBirth'].toISOString(),
+        departmentId: this.form.value['departmentId'],
+        department: {
+          id: this.form.value['departmentId'],
+          name: pickedDept?.name,
+          schoolId: this.form.value['schoolId'],
+          school: {
+            id: this.form.value['schoolId'],
+            name: pickedSchool?.name
+          }
+        }
+      }
+      console.log(body)
+      this.studentService.createStudent(body)
+        .subscribe(response => {
+          console.log(response)
+        })
+      } else {
+        console.log(form)
+
     }
-  }
+    }
 
 }

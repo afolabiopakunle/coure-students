@@ -6,11 +6,13 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialsModule } from './materials/materials.module';
 import { HeaderComponent } from './components/partials/header/header.component';
+import { StudentsComponent } from './components/pages/students/students.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent
+    HeaderComponent,
+    StudentsComponent
   ],
   imports: [
     BrowserModule,

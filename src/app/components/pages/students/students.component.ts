@@ -18,7 +18,7 @@ export class StudentsComponent implements OnInit {
   constructor(public dialog: MatDialog, private studentsService: StudentService) {}
 
   STUDENTS_LIST: StudentModel[] = [];
-  displayedColumns: string[] = ['id', 'firstName', 'lastName', 'email', 'phoneNumber', 'department'];
+  displayedColumns: string[] = ['id', 'firstName', 'lastName', 'email', 'phoneNumber', 'departmentId'];
   dataSource = new MatTableDataSource<StudentModel>(this.STUDENTS_LIST);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;

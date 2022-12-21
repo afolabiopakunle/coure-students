@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { StudentModel } from '../../../models/student.model';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { DepartmentModel } from '../../../models/department.model';
 
 @Component({
   selector: 'app-students',
@@ -20,18 +21,22 @@ export class StudentsComponent implements OnInit {
   STUDENTS_LIST: StudentModel[] = [];
   displayedColumns: string[] = ['id', 'firstName', 'lastName', 'email', 'phoneNumber', 'departmentId'];
   dataSource = new MatTableDataSource<StudentModel>(this.STUDENTS_LIST);
+  departments!: DepartmentModel[];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   ngOnInit() {
-    this.dataSource.paginator = this.paginator;
     this.studentsService.getStudents()
       .subscribe(response => {
         this.dataSource = new MatTableDataSource<StudentModel>(response);
         this.dataSource.sort = this.sort;
-        console.log(response)
+        this.dataSource.paginator = this.paginator;
       });
+    this.studentsService.getDepartments()
+      .subscribe(response => {
+        this.departments = response;
+      })
   }
 
   ngAfterViewInit() {
@@ -42,6 +47,13 @@ export class StudentsComponent implements OnInit {
         width: '650px',
         enterAnimationDuration,
         exitAnimationDuration,
-      });
+      })
+        .afterClosed()
+        .subscribe(() => this.ngOnInit());;
+  }
+
+  findDept(dept: number) {
+    const depart = this.departments?.find(department => dept == department.id )
+    return depart?.name
   }
 }

@@ -18,7 +18,7 @@ export class StudentsComponent implements OnInit {
   constructor(public dialog: MatDialog, private studentsService: StudentService) {}
 
   STUDENTS_LIST: StudentModel[] = [];
-  displayedColumns: string[] = ['id', 'firstName', 'lastName', 'email'];
+  displayedColumns: string[] = ['id', 'firstName', 'lastName', 'email', 'phoneNumber', 'department'];
   dataSource = new MatTableDataSource<StudentModel>(this.STUDENTS_LIST);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -30,6 +30,7 @@ export class StudentsComponent implements OnInit {
       .subscribe(response => {
         this.dataSource = new MatTableDataSource<StudentModel>(response);
         this.dataSource.sort = this.sort;
+        console.log(response)
       });
   }
 

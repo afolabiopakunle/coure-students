@@ -5,7 +5,7 @@ import { AddStudentModal } from './add-student-modal/add-student-modal.component
 import { MatTableDataSource } from '@angular/material/table';
 import { StudentModel } from '../../../models/student.model';
 import { MatPaginator } from '@angular/material/paginator';
-import { Observable } from 'rxjs';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-students',
@@ -22,18 +22,18 @@ export class StudentsComponent implements OnInit {
   dataSource = new MatTableDataSource<StudentModel>(this.STUDENTS_LIST);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
     this.studentsService.getStudents()
       .subscribe(response => {
-        this.dataSource = new MatTableDataSource<StudentModel>(response)
-        console.log(this.STUDENTS_LIST)
+        this.dataSource = new MatTableDataSource<StudentModel>(response);
+        this.dataSource.sort = this.sort;
       });
   }
 
   ngAfterViewInit() {
-    this.dataSource = new MatTableDataSource<StudentModel>(this.STUDENTS_LIST)
   }
 
   addStudent(enterAnimationDuration: string, exitAnimationDuration: string) {

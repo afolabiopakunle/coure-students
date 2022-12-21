@@ -16,13 +16,6 @@ export class StudentsComponent implements OnInit {
     this.studentsService.getStudents();
   }
 
-  // openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
-  //   this.dialog.open(DialogAnimationsExampleDialog, {
-  //     width: '250px',
-  //     enterAnimationDuration,
-  //     exitAnimationDuration,
-  //   });
-  // }
   addStudent(enterAnimationDuration: string, exitAnimationDuration: string) {
       this.dialog.open(AddStudentModal, {
         width: '550px',

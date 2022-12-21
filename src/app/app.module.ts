@@ -8,12 +8,14 @@ import { MaterialsModule } from './materials/materials.module';
 import { HeaderComponent } from './components/partials/header/header.component';
 import { StudentsComponent } from './components/pages/students/students.component';
 import { HttpClientModule } from '@angular/common/http';
+import { AddStudentModal } from './components/pages/students/add-student-modal/add-student-modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    StudentsComponent
+    StudentsComponent,
+    AddStudentModal
   ],
   imports: [
     BrowserModule,

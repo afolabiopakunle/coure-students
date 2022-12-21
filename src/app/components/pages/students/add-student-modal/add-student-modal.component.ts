@@ -16,8 +16,8 @@ export class AddStudentModal implements OnInit {
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      firstname: ['', [Validators.required]],
-      lastname: ['', [Validators.required]],
+      firstName: ['', [Validators.required]],
+      lastName: ['', [Validators.required]],
       title: ['', [Validators.required]],
       phoneNumber: ['', [Validators.required,]],
       email: ['', [Validators.required, Validators.email]],
@@ -25,6 +25,10 @@ export class AddStudentModal implements OnInit {
       departmentId: ['', [Validators.required]],
       department: ['', [Validators.required]]
     })
+  }
+
+  submit() {
+    console.log(this.form)
   }
 
 }

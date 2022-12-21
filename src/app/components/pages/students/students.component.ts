@@ -39,7 +39,7 @@ export class StudentsComponent implements OnInit {
 
   addStudent(enterAnimationDuration: string, exitAnimationDuration: string) {
       this.dialog.open(AddStudentModal, {
-        width: '550px',
+        width: '650px',
         enterAnimationDuration,
         exitAnimationDuration,
       });

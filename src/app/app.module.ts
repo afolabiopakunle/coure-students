@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialsModule } from './materials/materials.module';
 import { HeaderComponent } from './components/partials/header/header.component';
 import { StudentsComponent } from './components/pages/students/students.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { StudentsComponent } from './components/pages/students/students.componen
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

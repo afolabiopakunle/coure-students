@@ -39,9 +39,6 @@ export class StudentsComponent implements OnInit {
       })
   }
 
-  ngAfterViewInit() {
-  }
-
   addStudent(enterAnimationDuration: string, exitAnimationDuration: string) {
       this.dialog.open(AddStudentModal, {
         width: '650px',

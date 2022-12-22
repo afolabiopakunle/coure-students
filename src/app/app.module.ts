@@ -13,6 +13,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { DeleteStudentModal } from './components/pages/students/delete-student-modal/delete-student-modal.component';
 import { DepartmentsComponent } from './components/pages/departments/departments.component';
 import { SchoolsComponent } from './components/pages/schools/schools.component';
+import { AddSchoolModal } from './components/pages/schools/add-school-modal/add-school-modal.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { SchoolsComponent } from './components/pages/schools/schools.component';
     AddStudentModal,
     DeleteStudentModal,
     DepartmentsComponent,
-    SchoolsComponent
+    SchoolsComponent,
+    AddSchoolModal
   ],
   imports: [
     BrowserModule,

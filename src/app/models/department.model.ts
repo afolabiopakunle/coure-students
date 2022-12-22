@@ -1,7 +1,7 @@
 import { SchoolModel } from './school.model';
 
 export interface DepartmentModel {
-  id: number,
+  id?: number,
   name?: string,
   schoolId: number,
   school: SchoolModel

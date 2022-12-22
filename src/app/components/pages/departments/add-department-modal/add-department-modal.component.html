@@ -1,0 +1,14 @@
+<div class="row p-5">
+  <div class="col mat-typography">
+    <h2>{{ data ? 'Edit' : 'Add'}} School</h2>
+
+    <form (ngSubmit)="submit(form)" [formGroup]="form" >
+      <mat-form-field appearance="outline">
+        <mat-label>School name</mat-label>
+        <input formControlName="name" matInput placeholder="School name">
+        <mat-error *ngIf="form.controls['name'].errors?.['required']">School name is required</mat-error>
+      </mat-form-field>
+      <button [disabled]="form.invalid" type="submit" mat-raised-button color="primary" class="d-block ms-auto">{{data ? 'Update' : 'Submit'}}</button>
+    </form>
+  </div>
+</div>

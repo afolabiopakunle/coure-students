@@ -50,7 +50,7 @@ export class SchoolsComponent implements OnInit {
   }
 
   getRecord(row: any, enterAnimationDuration: string, exitAnimationDuration: string) {
-    this.dialog.open(AddStudentModal, {
+    this.dialog.open(AddSchoolModal, {
       width: '650px',
       enterAnimationDuration,
       exitAnimationDuration,

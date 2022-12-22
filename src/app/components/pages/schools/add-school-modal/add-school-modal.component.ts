@@ -23,7 +23,7 @@ export class AddSchoolModal implements OnInit {
 
   ngOnInit() {
     this.form = this.fb.group({
-      name: ['', Validators.required]
+      name: [this.data?.name || '', Validators.required]
     })
   }
 

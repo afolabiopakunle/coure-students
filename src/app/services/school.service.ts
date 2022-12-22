@@ -24,6 +24,6 @@ export class SchoolService {
   }
 
   updateSchool(id: string, body: any) {
-    return this.http.put(`${environment.API_BASE_URL}/schools`, body)
+    return this.http.put(`${environment.API_BASE_URL}/schools/${id}`, body)
   }
 }

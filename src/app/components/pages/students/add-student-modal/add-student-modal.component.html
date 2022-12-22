@@ -52,7 +52,7 @@
         <input formControlName="address" matInput placeholder="Address">
         <mat-error *ngIf="form.controls['address'].errors?.['required']">Address is required</mat-error>
       </mat-form-field>
-      <button [disabled]="form.invalid" type="submit" mat-raised-button color="primary" class="d-block ms-auto">Submit</button>
+      <button [disabled]="form.invalid" type="submit" mat-raised-button color="primary" class="d-block ms-auto">{{data ? 'Update' : 'Submit'}}</button>
     </form>
   </div>
 </div>

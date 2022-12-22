@@ -27,15 +27,15 @@ export class AddStudentModal implements OnInit {
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      firstName: ['', [Validators.required]],
-      lastName: ['', [Validators.required]],
-      title: ['', [Validators.required]],
-      phoneNumber: ['', [Validators.required,]],
-      dateOfBirth: ['', [Validators.required,]],
-      email: ['', [Validators.required, Validators.email]],
-      address: ['', [Validators.required]],
-      departmentId: ['', [Validators.required]],
-      schoolId: ['', [Validators.required]],
+      firstName: [ this.data?.firstName || '', [Validators.required]],
+      lastName: [ this.data?.lastName || '', [Validators.required]],
+      title: [this.data?.title || '', [Validators.required]],
+      phoneNumber: [this.data?.phoneNumber || '', [Validators.required,]],
+      dateOfBirth: [this.data?.dateOfBirth ||'', [Validators.required,]],
+      email: [this.data?.email || '', [Validators.required, Validators.email]],
+      address: [this.data?.address || '', [Validators.required]],
+      departmentId: [this.data?.departmentId || '', [Validators.required]],
+      schoolId: [this.data?.schoolId || ''],
     })
     this.studentService.getDepartments()
       .subscribe(response => {
@@ -44,7 +44,6 @@ export class AddStudentModal implements OnInit {
     this.studentService.getSchools()
       .subscribe(response => {
         this.schools = response;
-        console.log(this.schools)
       })
   }
 

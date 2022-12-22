@@ -19,7 +19,7 @@ export class StudentsComponent implements OnInit {
   constructor(public dialog: MatDialog, private studentsService: StudentService) {}
 
   STUDENTS_LIST: StudentModel[] = [];
-  displayedColumns: string[] = ['id', 'firstName', 'lastName', 'email', 'phoneNumber', 'departmentId'];
+  displayedColumns: string[] = ['id', 'firstName', 'lastName', 'email', 'phoneNumber', 'departmentId',];
   dataSource = new MatTableDataSource<StudentModel>(this.STUDENTS_LIST);
   departments!: DepartmentModel[];
 
@@ -57,5 +57,15 @@ export class StudentsComponent implements OnInit {
   findDept(dept: number) {
     const depart = this.departments?.find(department => dept == department.id )
     return depart?.name
+  }
+
+  getRecord(row: any, enterAnimationDuration: string, exitAnimationDuration: string) {
+    this.dialog.open(AddStudentModal, {
+      width: '650px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+      data: row,
+    })
+    console.log(row)
   }
 }

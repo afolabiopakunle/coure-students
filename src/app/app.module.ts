@@ -11,6 +11,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { AddStudentModal } from './components/pages/students/add-student-modal/add-student-modal.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DeleteStudentModal } from './components/pages/students/delete-student-modal/delete-student-modal.component';
+import { DepartmentsComponent } from './components/pages/departments/departments.component';
+import { SchoolsComponent } from './components/pages/schools/schools.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { DeleteStudentModal } from './components/pages/students/delete-student-m
     HeaderComponent,
     StudentsComponent,
     AddStudentModal,
-    DeleteStudentModal
+    DeleteStudentModal,
+    DepartmentsComponent,
+    SchoolsComponent
   ],
   imports: [
     BrowserModule,

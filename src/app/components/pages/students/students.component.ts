@@ -49,7 +49,9 @@ export class StudentsComponent implements OnInit {
         exitAnimationDuration,
       })
         .afterClosed()
-        .subscribe(() => this.ngOnInit());;
+        .subscribe(() => {
+          this.ngOnInit();
+        });
   }
 
   findDept(dept: number) {

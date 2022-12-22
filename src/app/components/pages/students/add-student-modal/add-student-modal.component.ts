@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { StudentService } from '../../../../services/student.service';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { DepartmentModel } from '../../../../models/department.model';
 import { SchoolModel } from '../../../../models/school.model';
 import { StudentModel } from '../../../../models/student.model';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-add-student-modal',
@@ -16,7 +17,12 @@ export class AddStudentModal implements OnInit {
   departments: DepartmentModel[] = [];
   schools: SchoolModel[] = [];
 
-  constructor(private studentService: StudentService, private fb: FormBuilder) {
+  constructor(
+    private studentService: StudentService,
+    private fb: FormBuilder,
+    public dialogRef: MatDialogRef<AddStudentModal>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    ) {
   }
 
   ngOnInit(): void {
@@ -34,7 +40,6 @@ export class AddStudentModal implements OnInit {
     this.studentService.getDepartments()
       .subscribe(response => {
         this.departments = response;
-        console.log(this.departments)
       })
     this.studentService.getSchools()
       .subscribe(response => {
@@ -69,12 +74,18 @@ export class AddStudentModal implements OnInit {
       }
       console.log(body)
       this.studentService.createStudent(body)
-        .subscribe(response => {
-          console.log(response)
+        .subscribe({
+          next: (data) => {
+            console.log(data);
+            this.dialogRef.close();
+          },
+          error: (err) => {
+            console.log(err);
+            this.dialogRef.close();
+          }
         })
       } else {
-        console.log(form)
-
+        this.dialogRef.close()
     }
     }
 

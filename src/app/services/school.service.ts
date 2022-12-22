@@ -16,7 +16,7 @@ export class SchoolService {
   }
 
   deleteSchool(id: string) {
-    return this.http.delete(`${environment.API_BASE_URL}/students/${id}`)
+    return this.http.delete(`${environment.API_BASE_URL}/schools/${id}`)
   }
 
   createSchool(body: any) {

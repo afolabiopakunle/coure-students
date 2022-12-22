@@ -4,12 +4,10 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
 import { SchoolService } from '../../../services/school.service';
-import { StudentModel } from '../../../models/student.model';
 import { MatTableDataSource } from '@angular/material/table';
-import { DepartmentModel } from '../../../models/department.model';
 import { SchoolModel } from '../../../models/school.model';
-import { DeleteStudentModal } from '../students/delete-student-modal/delete-student-modal.component';
 import { AddSchoolModal } from './add-school-modal/add-school-modal.component';
+import { DeleteSchoolModal } from './delete-school/delete-school.component';
 
 @Component({
   selector: 'app-schools',
@@ -63,7 +61,7 @@ export class SchoolsComponent implements OnInit {
   }
 
   deleteSchool(row: any, enterAnimationDuration: string, exitAnimationDuration: string) {
-    this.dialog.open(DeleteStudentModal, {
+    this.dialog.open(DeleteSchoolModal, {
       width: '650px',
       enterAnimationDuration,
       exitAnimationDuration,

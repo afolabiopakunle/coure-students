@@ -9,7 +9,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 @Component({
   selector: 'app-add-student-modal',
   templateUrl: './add-student-modal.component.html',
-  styleUrls: ['./add-student-modal.component.scss']
+  styleUrls: ['./add-student-modal.component.scss'],
 })
 export class AddStudentModal implements OnInit {
 
@@ -22,16 +22,16 @@ export class AddStudentModal implements OnInit {
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<AddStudentModal>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    ) {
+  ) {
   }
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      firstName: [ this.data?.firstName || '', [Validators.required]],
-      lastName: [ this.data?.lastName || '', [Validators.required]],
+      firstName: [this.data?.firstName || '', [Validators.required]],
+      lastName: [this.data?.lastName || '', [Validators.required]],
       title: [this.data?.title || '', [Validators.required]],
-      phoneNumber: [this.data?.phoneNumber || '', [Validators.required,]],
-      dateOfBirth: [this.data?.dateOfBirth ||'', [Validators.required,]],
+      phoneNumber: [this.data?.phoneNumber || '', [Validators.required]],
+      dateOfBirth: [this.data?.dateOfBirth || '', [Validators.required]],
       email: [this.data?.email || '', [Validators.required, Validators.email]],
       address: [this.data?.address || '', [Validators.required]],
       departmentId: [this.data?.departmentId || '', [Validators.required]],
@@ -49,11 +49,11 @@ export class AddStudentModal implements OnInit {
 
   submit(form: FormGroup) {
     if (form.valid) {
-    const pickedDept = this.departments.find(department => department.id === this.form.value['departmentId']);
-    const pickedSchool = this.schools.find(school => school.id === this.form.value['schoolId']);
-    const pickedDOB = (typeof this.form?.value['dateOfBirth'] == 'object') ? this.form?.value['dateOfBirth'].toISOString() : this.form.value['dateOfBirth'];
+      const pickedDept = this.departments.find(department => department.id === this.form.value['departmentId']);
+      const pickedSchool = this.schools.find(school => school.id === this.form.value['schoolId']);
+      const pickedDOB = (typeof this.form?.value['dateOfBirth'] == 'object') ? this.form?.value['dateOfBirth'].toISOString() : this.form.value['dateOfBirth'];
       console.log(typeof this.form?.value['dateOfBirth'], 'TYPE')
-    const body: StudentModel = {
+      const body: StudentModel = {
         firstName: this.form.value['firstName'],
         lastName: this.form.value['lastName'],
         title: this.form.value['title'],
@@ -68,11 +68,11 @@ export class AddStudentModal implements OnInit {
           schoolId: this.form.value['schoolId'],
           school: {
             id: this.form.value['schoolId'],
-            name: pickedSchool?.name
-          }
-        }
+            name: pickedSchool?.name,
+          },
+        },
       }
-      if(!this.data) {
+      if (!this.data) {
         this.studentService.createStudent(body)
           .subscribe({
             next: (data) => {
@@ -82,7 +82,7 @@ export class AddStudentModal implements OnInit {
             error: (err) => {
               console.log(err);
               this.dialogRef.close();
-            }
+            },
           })
       } else {
         console.log(this.data.id)
@@ -96,13 +96,13 @@ export class AddStudentModal implements OnInit {
             error: (err) => {
               console.log(err);
               this.dialogRef.close();
-            }
+            },
           })
       }
 
-      } else {
-        this.dialogRef.close()
+    } else {
+      this.dialogRef.close()
     }
-    }
+  }
 
 }

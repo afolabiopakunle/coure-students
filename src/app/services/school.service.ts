@@ -18,4 +18,12 @@ export class SchoolService {
   deleteSchool(id: string) {
     return this.http.delete(`${environment.API_BASE_URL}/students/${id}`)
   }
+
+  createSchool(body: any) {
+    return this.http.post(`${environment.API_BASE_URL}/schools`, body)
+  }
+
+  updateSchool(id: string, body: any) {
+    return this.http.put(`${environment.API_BASE_URL}/schools`, body)
+  }
 }

@@ -29,10 +29,12 @@ export class AddDepartmentModal {
 
   submit(form: FormGroup) {
     if (form.valid) {
-      const body: any = {
+      const schoolId = this.data.schoolId;
+      const body: DepartmentModel = {
         id: this.form.value['id'],
         name: this.form.value['name'],
-        // schoolId:
+        schoolId,
+        school: null
       }
       if (!this.data) {
         this.departmentService.createDepartment(body)

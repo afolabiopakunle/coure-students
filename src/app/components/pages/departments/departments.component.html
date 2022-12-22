@@ -1,1 +1,45 @@
-<p>departments works!</p>
+<div class="container pt-5" style="min-height: 85vh">
+  <button (click)="addDepartment('500ms','300ms')" mat-raised-button color="primary">Add school</button>
+
+  <hr>
+
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort>
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> ID. </th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="school">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> School </th>
+        <td mat-cell *matCellDef="let element"> {{findSchool(element.schoolId)}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="getDetails">
+        <th mat-header-cell *matHeaderCellDef>Edit</th>
+        <td mat-cell *matCellDef="let row"> <button mat-raised-button color="accent" (click)="getRecord(row, '500ms', '300ms')">Edit</button> </td>
+      </ng-container>
+
+      <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef>Delete</th>
+        <td mat-cell *matCellDef="let row"> <button mat-raised-button color="warn" (click)="deleteDepartment(row, '500ms', '300ms')">Delete</button> </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[10, 20, 40]"
+                   showFirstLastButtons
+                   aria-label="Select page of students">
+    </mat-paginator>
+  </div>
+</div>

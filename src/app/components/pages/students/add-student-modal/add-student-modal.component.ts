@@ -51,15 +51,16 @@ export class AddStudentModal implements OnInit {
     if (form.valid) {
     const pickedDept = this.departments.find(department => department.id === this.form.value['departmentId']);
     const pickedSchool = this.schools.find(school => school.id === this.form.value['schoolId']);
+    const pickedDOB = (typeof this.form?.value['dateOfBirth'] == 'object') ? this.form?.value['dateOfBirth'].toISOString() : this.form.value['dateOfBirth'];
+      console.log(typeof this.form?.value['dateOfBirth'], 'TYPE')
     const body: StudentModel = {
-        // id: Math.random() * 9999999,
         firstName: this.form.value['firstName'],
         lastName: this.form.value['lastName'],
         title: this.form.value['title'],
         email: this.form.value['email'],
         address: this.form.value['address'],
         phoneNumber: this.form.value['phoneNumber'],
-        dateOfBirth: this.form.value['dateOfBirth'].toISOString(),
+        dateOfBirth: pickedDOB,
         departmentId: this.form.value['departmentId'],
         department: {
           id: this.form.value['departmentId'],
@@ -71,18 +72,34 @@ export class AddStudentModal implements OnInit {
           }
         }
       }
-      console.log(body)
-      this.studentService.createStudent(body)
-        .subscribe({
-          next: (data) => {
-            console.log(data);
-            this.dialogRef.close();
-          },
-          error: (err) => {
-            console.log(err);
-            this.dialogRef.close();
-          }
-        })
+      if(!this.data) {
+        this.studentService.createStudent(body)
+          .subscribe({
+            next: (data) => {
+              console.log(data);
+              this.dialogRef.close();
+            },
+            error: (err) => {
+              console.log(err);
+              this.dialogRef.close();
+            }
+          })
+      } else {
+        console.log(this.data.id)
+        body.id = this.data.id;
+        this.studentService.updateStudent(this.data.id, body)
+          .subscribe({
+            next: (data) => {
+              console.log(data);
+              this.dialogRef.close();
+            },
+            error: (err) => {
+              console.log(err);
+              this.dialogRef.close();
+            }
+          })
+      }
+
       } else {
         this.dialogRef.close()
     }

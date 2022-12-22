@@ -40,8 +40,13 @@
         <td mat-cell *matCellDef="let element"> {{findDept(element.departmentId)}} </td>
       </ng-container>
 
+      <ng-container matColumnDef="getDetails">
+        <th mat-header-cell *matHeaderCellDef>Edit</th>
+        <td mat-cell *matCellDef="let row"> <button mat-raised-button color="accent" (click)="getRecord(row, '500ms', '300ms')">Edit</button> </td>
+      </ng-container>
+
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="getRecord(row, '500ms', '300ms')"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
 
     <mat-paginator [pageSizeOptions]="[5, 10, 20]"

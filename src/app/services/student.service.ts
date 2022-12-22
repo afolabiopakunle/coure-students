@@ -28,4 +28,9 @@ export class StudentService {
   getSchools(): Observable<SchoolModel[]> {
     return this.http.get<SchoolModel[]>(`${environment.API_BASE_URL}/schools`)
   }
+
+  updateStudent(id: number, data: StudentModel) {
+    return this.http.put(`${environment.API_BASE_URL}/students/${id}`, data)
+  }
+
 }

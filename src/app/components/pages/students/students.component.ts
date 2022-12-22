@@ -19,7 +19,7 @@ export class StudentsComponent implements OnInit {
   constructor(public dialog: MatDialog, private studentsService: StudentService) {}
 
   STUDENTS_LIST: StudentModel[] = [];
-  displayedColumns: string[] = ['id', 'firstName', 'lastName', 'email', 'phoneNumber', 'departmentId',];
+  displayedColumns: string[] = ['id', 'firstName', 'lastName', 'email', 'phoneNumber', 'departmentId', 'getDetails'];
   dataSource = new MatTableDataSource<StudentModel>(this.STUDENTS_LIST);
   departments!: DepartmentModel[];
 
@@ -66,6 +66,9 @@ export class StudentsComponent implements OnInit {
       exitAnimationDuration,
       data: row,
     })
-    console.log(row)
+      .afterClosed()
+      .subscribe(() => {
+        this.ngOnInit();
+      });
   }
 }

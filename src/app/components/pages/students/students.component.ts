@@ -7,6 +7,7 @@ import { StudentModel } from '../../../models/student.model';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { DepartmentModel } from '../../../models/department.model';
+import { DeleteStudentModal } from './delete-student-modal/delete-student-modal.component';
 
 @Component({
   selector: 'app-students',
@@ -19,7 +20,7 @@ export class StudentsComponent implements OnInit {
   constructor(public dialog: MatDialog, private studentsService: StudentService) {}
 
   STUDENTS_LIST: StudentModel[] = [];
-  displayedColumns: string[] = ['id', 'firstName', 'lastName', 'email', 'phoneNumber', 'departmentId', 'getDetails'];
+  displayedColumns: string[] = ['id', 'firstName', 'lastName', 'email', 'phoneNumber', 'departmentId', 'getDetails', 'delete'];
   dataSource = new MatTableDataSource<StudentModel>(this.STUDENTS_LIST);
   departments!: DepartmentModel[];
 
@@ -71,4 +72,60 @@ export class StudentsComponent implements OnInit {
         this.ngOnInit();
       });
   }
+
+  deleteStudent(row: any, enterAnimationDuration: string, exitAnimationDuration: string) {
+    this.dialog.open(DeleteStudentModal, {
+      width: '650px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+      data: {
+        row,
+        message: 'Are you sure you want to delete?',
+        buttonText: {
+          ok: 'Delete',
+          cancel: 'No'
+        }
+      },
+    })
+        .afterClosed().subscribe((confirmed: boolean) => {
+          if (confirmed) {
+            console.log(confirmed, row)
+            const a = document.createElement('a');
+            a.click();
+            a.remove();
+          }})
+  }
+
+  // openDialog() {
+  //   const dialogRef = this.dialog.open(ConfirmationDialog,{
+  //     data:{
+  //       message: 'Are you sure want to delete?',
+  //       buttonText: {
+  //         ok: 'Save',
+  //         cancel: 'No'
+  //       }
+  //     }
+  //   })
+  //     .afterClosed().subscribe((confirmed: boolean) => {
+  //       if (confirmed) {
+  //         // snack.dismiss();
+  //         const a = document.createElement('a');
+  //         a.click();
+  //         a.remove();
+  //       }})
+    // const snack = this.snackBar.open('Snack bar open before dialog');
+
+    // dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+    //   if (confirmed) {
+    //     // snack.dismiss();
+    //     const a = document.createElement('a');
+    //     a.click();
+    //     a.remove();
+    //     // snack.dismiss();
+    //     // this.snackBar.open('Closing snack bar in a few seconds', 'Fechar', {
+    //     //   duration: 2000,
+    //     // });
+    //   }
+    // });
+
 }

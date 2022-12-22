@@ -10,13 +10,15 @@ import { StudentsComponent } from './components/pages/students/students.componen
 import { HttpClientModule } from '@angular/common/http';
 import { AddStudentModal } from './components/pages/students/add-student-modal/add-student-modal.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DeleteStudentModal } from './components/pages/students/delete-student-modal/delete-student-modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     StudentsComponent,
-    AddStudentModal
+    AddStudentModal,
+    DeleteStudentModal
   ],
   imports: [
     BrowserModule,

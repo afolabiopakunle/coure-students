@@ -1,0 +1,12 @@
+<div class="row p-5">
+  <div class="col mat-typography">
+    <h2>Delete Student</h2>
+    <p>
+      {{data?.row?.firstName}}
+    </p>
+    <div class="text-end">
+      <button mat-raised-button color="warn" class="me-3" (click)="onConfirmClick()" tabindex="1">Delete</button>
+      <button mat-raised-button mat-dialog-close tabindex="-1">No</button>
+    </div>
+  </div>
+</div>

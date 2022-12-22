@@ -33,4 +33,8 @@ export class StudentService {
     return this.http.put(`${environment.API_BASE_URL}/students/${id}`, data)
   }
 
+  deleteStudent(id: string) {
+    return this.http.delete(`${environment.API_BASE_URL}/students/${id}`)
+  }
+
 }

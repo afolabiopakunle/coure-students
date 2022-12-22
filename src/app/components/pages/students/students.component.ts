@@ -16,7 +16,6 @@ import { DeleteStudentModal } from './delete-student-modal/delete-student-modal.
 })
 export class StudentsComponent implements OnInit {
 
-
   constructor(public dialog: MatDialog, private studentsService: StudentService) {}
 
   STUDENTS_LIST: StudentModel[] = [];
@@ -89,43 +88,16 @@ export class StudentsComponent implements OnInit {
     })
         .afterClosed().subscribe((confirmed: boolean) => {
           if (confirmed) {
-            console.log(confirmed, row)
-            const a = document.createElement('a');
-            a.click();
-            a.remove();
+            console.log(confirmed, row);
+            this.studentsService.deleteStudent(row.id)
+              .subscribe(response => {
+                const a = document.createElement('a');
+                a.click();
+                a.remove();
+                this.ngOnInit();
+              })
+
           }})
   }
-
-  // openDialog() {
-  //   const dialogRef = this.dialog.open(ConfirmationDialog,{
-  //     data:{
-  //       message: 'Are you sure want to delete?',
-  //       buttonText: {
-  //         ok: 'Save',
-  //         cancel: 'No'
-  //       }
-  //     }
-  //   })
-  //     .afterClosed().subscribe((confirmed: boolean) => {
-  //       if (confirmed) {
-  //         // snack.dismiss();
-  //         const a = document.createElement('a');
-  //         a.click();
-  //         a.remove();
-  //       }})
-    // const snack = this.snackBar.open('Snack bar open before dialog');
-
-    // dialogRef.afterClosed().subscribe((confirmed: boolean) => {
-    //   if (confirmed) {
-    //     // snack.dismiss();
-    //     const a = document.createElement('a');
-    //     a.click();
-    //     a.remove();
-    //     // snack.dismiss();
-    //     // this.snackBar.open('Closing snack bar in a few seconds', 'Fechar', {
-    //     //   duration: 2000,
-    //     // });
-    //   }
-    // });
 
 }

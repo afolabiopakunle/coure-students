@@ -17,6 +17,7 @@ import { AddSchoolModal } from './components/pages/schools/add-school-modal/add-
 import { DeleteSchoolModal } from './components/pages/schools/delete-school/delete-school.component';
 import { AddDepartmentModal } from './components/pages/departments/add-department-modal/add-department-modal.component';
 import { DeleteDepartmentModal } from './components/pages/departments/delete-department-modal/delete-department-modal.component';
+import { OnlyNumber } from './services/directives/NumbersOnly';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { DeleteDepartmentModal } from './components/pages/departments/delete-dep
     AddSchoolModal,
     DeleteSchoolModal,
     AddDepartmentModal,
-    DeleteDepartmentModal
+    DeleteDepartmentModal,
+    OnlyNumber,
   ],
   imports: [
     BrowserModule,

@@ -12,10 +12,13 @@
         <input formControlName="lastName" matInput placeholder="Last name">
         <mat-error *ngIf="form.controls['lastName'].errors?.['required']">Last name is required</mat-error>
       </mat-form-field>
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="fill">
         <mat-label>Title</mat-label>
-        <input formControlName="title" matInput placeholder="Title">
-        <mat-error *ngIf="form.controls['title'].errors?.['required']">Title is required</mat-error>
+        <mat-select formControlName="title">
+          <mat-option [value]="'Mr.'">Mr.</mat-option>
+          <mat-option [value]="'Ms.'">Ms.</mat-option>
+          <mat-option [value]="'Mrs.'">Mrs.</mat-option>
+        </mat-select>
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Choose a date</mat-label>
@@ -38,7 +41,7 @@
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Phone number</mat-label>
-        <input formControlName="phoneNumber" matInput placeholder="Phone number">
+        <input formControlName="phoneNumber" [OnlyNumber]="true" matInput placeholder="Phone number">
         <mat-error *ngIf="form.controls['phoneNumber'].errors?.['required']">Phone number is required</mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline">
@@ -47,9 +50,13 @@
         <mat-error *ngIf="form.controls['email'].errors?.['required']">Email is required</mat-error>
         <mat-error *ngIf="form.controls['email'].errors?.['email']">Email is invalid</mat-error>
       </mat-form-field>
+<!--      <mat-form-field appearance="outline">-->
+<!--        <mat-label>Address</mat-label>-->
+<!--        <input formControlName="address" matInput placeholder="Address">-->
+<!--      </mat-form-field>-->
       <mat-form-field appearance="outline">
         <mat-label>Address</mat-label>
-        <input formControlName="address" matInput placeholder="Address">
+        <textarea cdkTextareaAutosize formControlName="address" matInput placeholder="Address"></textarea>
         <mat-error *ngIf="form.controls['address'].errors?.['required']">Address is required</mat-error>
       </mat-form-field>
       <button [disabled]="form.invalid" type="submit" mat-raised-button color="primary" class="d-block ms-auto">{{data ? 'Update' : 'Submit'}}</button>

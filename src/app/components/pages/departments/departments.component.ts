@@ -1,16 +1,15 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { SchoolModel } from '../../../models/school.model';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
-import { SchoolService } from '../../../services/school.service';
-import { AddSchoolModal } from '../schools/add-school-modal/add-school-modal.component';
-import { DeleteSchoolModal } from '../schools/delete-school/delete-school.component';
 import { AddDepartmentModal } from './add-department-modal/add-department-modal.component';
 import { DepartmentService } from '../../../services/department.service';
 import { AddStudentModal } from '../students/add-student-modal/add-student-modal.component';
 import { DepartmentModel } from '../../../models/department.model';
+import { DeleteDepartmentModal } from './delete-department-modal/delete-department-modal.component';
+import { SchoolService } from '../../../services/school.service';
+import { SchoolModel } from '../../../models/school.model';
 
 @Component({
   selector: 'app-departments',
@@ -23,11 +22,14 @@ export class DepartmentsComponent implements OnInit {
   displayedColumns: string[] = ['id', 'name', 'school', 'getDetails', 'delete'];
   dataSource = new MatTableDataSource<DepartmentModel>(this.DEPARTMENT_LIST);
   depts: DepartmentModel[] = [];
+  schools: SchoolModel[] = [];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(public dialog: MatDialog, private departmentService: DepartmentService) {
+  constructor(public dialog: MatDialog,
+              private departmentService: DepartmentService,
+              private schoolService: SchoolService) {
   }
 
   ngOnInit() {
@@ -37,6 +39,10 @@ export class DepartmentsComponent implements OnInit {
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
       });
+    this.schoolService.getSchools()
+      .subscribe(response => {
+        this.schools = response;
+      })
   }
 
   getRecord(row: any, enterAnimationDuration: string, exitAnimationDuration: string) {
@@ -53,7 +59,7 @@ export class DepartmentsComponent implements OnInit {
   }
 
   deleteDepartment(row: any, enterAnimationDuration: string, exitAnimationDuration: string) {
-    this.dialog.open(DeleteSchoolModal, {
+    this.dialog.open(DeleteDepartmentModal, {
       width: '650px',
       enterAnimationDuration,
       exitAnimationDuration,
@@ -80,7 +86,7 @@ export class DepartmentsComponent implements OnInit {
   }
 
   findDept(dept: number) {
-    const depart = this.depts?.find(school => dept == school.id )
+    const depart = this.schools?.find(school => dept == school.id )
     return depart?.name
   }
 

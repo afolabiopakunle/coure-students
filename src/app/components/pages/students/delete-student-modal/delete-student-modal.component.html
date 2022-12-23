@@ -1,9 +1,9 @@
 <div class="row p-5">
   <div class="col mat-typography">
-    <h2>Are you sure you want to delete student</h2>
-    <p>
-      {{data?.row?.firstName}}
-    </p>
+    <h2>Are you sure you want to delete</h2>
+    <h1>
+      {{data?.row?.firstName}} {{data?.row?.lastName}}?
+    </h1>
     <div class="text-end">
       <button mat-raised-button color="warn" class="me-3" (click)="onConfirmClick()" tabindex="1">Delete</button>
       <button mat-raised-button mat-dialog-close tabindex="-1">No</button>

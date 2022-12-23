@@ -16,6 +16,7 @@ import { SchoolsComponent } from './components/pages/schools/schools.component';
 import { AddSchoolModal } from './components/pages/schools/add-school-modal/add-school-modal.component';
 import { DeleteSchoolModal } from './components/pages/schools/delete-school/delete-school.component';
 import { AddDepartmentModal } from './components/pages/departments/add-department-modal/add-department-modal.component';
+import { DeleteDepartmentModal } from './components/pages/departments/delete-department-modal/delete-department-modal.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { AddDepartmentModal } from './components/pages/departments/add-departmen
     SchoolsComponent,
     AddSchoolModal,
     DeleteSchoolModal,
-    AddDepartmentModal
+    AddDepartmentModal,
+    DeleteDepartmentModal
   ],
   imports: [
     BrowserModule,

@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { SchoolModel } from '../models/school.model';
 import { environment } from '../environments/environment';
+import { DepartmentsComponent } from '../components/pages/departments/departments.component';
+import { DepartmentModel } from '../models/department.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +13,8 @@ export class DepartmentService {
 
   constructor(private http: HttpClient) { }
 
-  getDepartments(): Observable<SchoolModel[]> {
-    return this.http.get<SchoolModel[]>(`${environment.API_BASE_URL}/departments`)
+  getDepartments(): Observable<DepartmentModel[]> {
+    return this.http.get<DepartmentModel[]>(`${environment.API_BASE_URL}/departments`)
   }
 
   deleteDepartment(id: string) {

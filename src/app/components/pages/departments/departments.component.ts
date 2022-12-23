@@ -10,6 +10,7 @@ import { DeleteSchoolModal } from '../schools/delete-school/delete-school.compon
 import { AddDepartmentModal } from './add-department-modal/add-department-modal.component';
 import { DepartmentService } from '../../../services/department.service';
 import { AddStudentModal } from '../students/add-student-modal/add-student-modal.component';
+import { DepartmentModel } from '../../../models/department.model';
 
 @Component({
   selector: 'app-departments',
@@ -18,10 +19,10 @@ import { AddStudentModal } from '../students/add-student-modal/add-student-modal
 })
 export class DepartmentsComponent implements OnInit {
 
-  DEPARTMENT_LIST: SchoolModel[] = [];
+  DEPARTMENT_LIST: DepartmentModel[] = [];
   displayedColumns: string[] = ['id', 'name', 'school', 'getDetails', 'delete'];
-  dataSource = new MatTableDataSource<SchoolModel>(this.DEPARTMENT_LIST);
-  schools: SchoolModel[] = [];
+  dataSource = new MatTableDataSource<DepartmentModel>(this.DEPARTMENT_LIST);
+  depts: DepartmentModel[] = [];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -32,7 +33,7 @@ export class DepartmentsComponent implements OnInit {
   ngOnInit() {
     this.departmentService.getDepartments()
       .subscribe(response => {
-        this.dataSource = new MatTableDataSource<SchoolModel>(response);
+        this.dataSource = new MatTableDataSource<DepartmentModel>(response);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
       });
@@ -78,13 +79,13 @@ export class DepartmentsComponent implements OnInit {
       }})
   }
 
-  findSchool(dept: number) {
-    const depart = this.schools?.find(school => dept == school.id )
+  findDept(dept: number) {
+    const depart = this.depts?.find(school => dept == school.id )
     return depart?.name
   }
 
   addDepartment(enterAnimationDuration: string, exitAnimationDuration: string) {
-    this.dialog.open(AddStudentModal, {
+    this.dialog.open(AddDepartmentModal, {
       width: '650px',
       enterAnimationDuration,
       exitAnimationDuration,
